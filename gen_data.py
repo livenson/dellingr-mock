@@ -22,7 +22,7 @@ choice = 'choice'
 listattr = 'list'
 
 # Location where images are located
-base = '/Users/ilja/workspace/dellingr-mock/'  # path relative to the cwd or absolute
+base = ''  # path relative to the cwd or absolute
 
 #### eInfraCentral catalogue ####
 
