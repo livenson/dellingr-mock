@@ -203,9 +203,10 @@ aurora, _ = Offering.objects.get_or_create(
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
         u'system_information_queing_system': [u'system_information_queing_system_slurm'],
         u'system_information_work_space': u'/tmp',
-        u'support_email': u'servicedesk@csc.fi',
-        u'support_phone': u'+358 (0) 94 57 2821',
-        u'support_portal': u'https://research.csc.fi/support',
+        u'support_email': u'support@lunarc.lu.se',
+        u'support_phone': u'+46 2224454',
+        u'support_portal': u'https://supr.snic.se/support/',
+        u'support_guide': u'https://lunarc-documentation.readthedocs.io/en/latest/login_howto/',
     },
     options=hpc_configuration,
 )
@@ -304,22 +305,21 @@ abacus, _ = Offering.objects.get_or_create(
     category=cat,
     state=Offering.States.ACTIVE,
     description='The SDU eScience Center is a single point of reference for eScience and research e-infrastructure at SDU.',
-    full_description='<h2>Overview</h2>Aurora consists out of 180 compute nodes for SNIC use and over 50 compute nodes funded by '
-                     'research groups at Lund University.  Each node has two Intel Xeon E5-2650 v3 processors '
-                     '(Haswell), offering 20 compute cores per node.  The nodes have 64 GB of DDR4 ram installed.',
+    full_description='<h2>Overview</h2>Abacus 2.0 is a supercomputer with 14,016 processor cores. It may be used for a '
+                     'broad spectrum of demanding data processing workloads.',
     rating=5,
     customer=customer,
     type='Support.OfferingTemplate',
-    geolocations=[{"latitude": 55.7119513, "longitude": 13.2013043}],
+    geolocations=[{"latitude": 55.3686303, "longitude": 10.4266494}],
     attributes={
         u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E5-2680v3'],
         u'node_information_gpu': [u'node_information_gpu_NVidia_P100'],
         u'node_information_interconnect': [u'node_information_interconnect_Infiniband_FDR'],
-        u'node_information_local_disk': 0,
-        u'node_information_memory': 0,
-        u'node_information_node_count': 0,
-        u'performance_linpak': 0,
-        u'performance_tflops': 0,
+        u'node_information_local_disk': 200,
+        u'node_information_memory': 64,
+        u'node_information_node_count': 584,
+        u'performance_linpak': 462.4,
+        u'performance_tflops': 766.6,
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/home/smth',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
@@ -327,6 +327,7 @@ abacus, _ = Offering.objects.get_or_create(
         u'system_information_work_space': u'/tmp',
         u'support_email': u'support@escience.sdu.dk',
         u'support_phone': u'(+45) 6550 2678',
+        u'support_guide': u'https://escience.sdu.dk/index.php/slurm-job-scheduler/',
     },
     options=hpc_configuration
 )
