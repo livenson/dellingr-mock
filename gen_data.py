@@ -10,7 +10,9 @@ from django.core.files import File
 get_wsgi_application()
 
 
-from waldur_mastermind.marketplace.models import Category, Section, Attribute, AttributeOption, Offering, ServiceProvider
+from waldur_mastermind.marketplace.models import Category, Section, Attribute, \
+    AttributeOption, Offering, ServiceProvider, Plan, PlanComponent, OfferingComponent
+from waldur_mastermind.common.mixins import UnitPriceMixin
 from waldur_core.structure.models import Customer
 
 
@@ -127,11 +129,7 @@ enums = {
         ('Gromacs', 'GROMACS'),
     ],
     'certification': [
-        ('iskem', 'ISKE M'),
-        ('iskeh', 'ISKE H'),
-        ('iskel', 'ISKE L'),
-        ('iso27001', 'ISO27001'),
-        ('vahtiraised', 'VAHTI raised level'),
+        ('sensitive_data', 'Able to process sensitive data'),
     ]
 }
 
@@ -149,6 +147,31 @@ hpc_configuration = {
             }
         }
     }
+
+
+# default plan for all
+def generate_plan(offering):
+    cpu_usage, _ = OfferingComponent.objects.get_or_create(
+        offering=offering,
+        billing_type=OfferingComponent.BillingTypes.USAGE,
+        type='cpu_usage',
+        name='CPU usage',
+        measured_unit='CPU/h'
+    )
+
+    plan, _ = Plan.objects.get_or_create(
+        name='Dellingr pilot',
+        description='Default plan for all applications via Dellingr',
+        unit=UnitPriceMixin.Units.QUANTITY,
+        offering=offering,
+    )
+
+    cpu_usage_plan_component, _ = PlanComponent.objects.get_or_create(
+        plan=plan,
+        component=cpu_usage,
+        price=1
+    )
+
 
 cat, _ = Category.objects.get_or_create(title='HPC', description='High Performance Computing systems')
 cat.icon.save('data-center.svg', File(open(base + 'data-center.svg', 'r')))
@@ -180,6 +203,7 @@ ServiceProvider.objects.get_or_create(
 aurora, _ = Offering.objects.get_or_create(
     name='Aurora HPC cluster',
     category=cat,
+    shared=True,
     state=Offering.States.ACTIVE,
     description='Aurora is Lunarc\'s new general purpose HPC cluster',
     full_description='<h2>Overview</h2>Aurora consists out of 180 compute nodes for SNIC use and over 50 compute nodes funded by '
@@ -211,6 +235,7 @@ aurora, _ = Offering.objects.get_or_create(
     options=hpc_configuration,
 )
 aurora.thumbnail.save('aurora.jpg', File(open(base + 'aurora.jpg', 'r')))
+generate_plan(aurora)
 
 customer, _ = Customer.objects.get_or_create(
     name='CSC',
@@ -224,6 +249,7 @@ csc, _ = Offering.objects.get_or_create(
     name='CSC Taito',
     state=Offering.States.ACTIVE,
     category=cat,
+    shared=True,
     description='The Taito supercluster (taito.csc.fi) is intended for serial (single-core) and small to medium-size parallel jobs.',
     full_description='<h2>Overview</h2>The Taito supercluster (taito.csc.fi) is intended for serial (single-core) and '
                      'small to medium-size parallel jobs. There are also several "fat nodes" for jobs requiring a large '
@@ -254,6 +280,8 @@ csc, _ = Offering.objects.get_or_create(
     options=hpc_configuration
 )
 csc.thumbnail.save('csc.png', File(open(base + 'csc.png', 'r')))
+generate_plan(csc)
+
 
 customer, _ = Customer.objects.get_or_create(
     name='DeIC',
@@ -266,6 +294,7 @@ ServiceProvider.objects.get_or_create(
 computerome, _ = Offering.objects.get_or_create(
     name='Computerome',
     category=cat,
+    shared=True,
     state=Offering.States.ACTIVE,
     description='Access to Computerome is available to everyone interested in Life Sciences',
     full_description=u'<h2>Overview</h2>The Danish National Life Science Supercomputing Center, Computerome is a HPC '
@@ -299,10 +328,13 @@ computerome, _ = Offering.objects.get_or_create(
     options=hpc_configuration
 )
 computerome.thumbnail.save('computerome.png', File(open(base + 'computerome.png', 'r')))
+generate_plan(computerome)
+
 
 abacus, _ = Offering.objects.get_or_create(
     name='Abacus 2.0',
     category=cat,
+    shared=True,
     state=Offering.States.ACTIVE,
     description='The SDU eScience Center is a single point of reference for eScience and research e-infrastructure at SDU.',
     full_description='<h2>Overview</h2>Abacus 2.0 is a supercomputer with 14,016 processor cores. It may be used for a '
@@ -332,6 +364,8 @@ abacus, _ = Offering.objects.get_or_create(
     options=hpc_configuration
 )
 abacus.thumbnail.save('abacus.jpg', File(open(base + 'abacus.jpg', 'r')))
+generate_plan(abacus)
+
 
 customer, _ = Customer.objects.get_or_create(
     name='ETAIS',
@@ -345,6 +379,7 @@ ServiceProvider.objects.get_or_create(
 tartu, _ = Offering.objects.get_or_create(
     name='UT Rocket',
     category=cat,
+    shared=True,
     state=Offering.States.ACTIVE,
     description='General purpose HPC cluster in UT HPCC',
     full_description='<h2>Overview</h2>The High Performance Computing Center is a consortium of UT and its purpose '
@@ -375,6 +410,8 @@ tartu, _ = Offering.objects.get_or_create(
     options=hpc_configuration
 )
 tartu.thumbnail.save('tartu.png', File(open(base + 'tartu.png', 'r')))
+generate_plan(tartu)
+
 
 customer, _ = Customer.objects.get_or_create(
     name='University of Iceland',
@@ -388,6 +425,7 @@ ServiceProvider.objects.get_or_create(
 iceland, _ = Offering.objects.get_or_create(
     name='University of Iceland',
     category=cat,
+    shared=True,
     description='General purpose HPC cluster',
     state=Offering.States.ACTIVE,
     full_description='<h2>Overview</h2>TBA',
@@ -415,6 +453,8 @@ iceland, _ = Offering.objects.get_or_create(
     options=hpc_configuration
 )
 iceland.thumbnail.save('iceland.svg', File(open(base + 'iceland.svg', 'r')))
+generate_plan(iceland)
+
 
 # http://www.lunarc.lu.se/resources/hardware/aurora/
 # https://www.hpc2n.umu.se/resources/hardware/kebnekaise
