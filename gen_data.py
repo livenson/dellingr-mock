@@ -156,13 +156,13 @@ def generate_plan(offering):
         billing_type=OfferingComponent.BillingTypes.USAGE,
         type='cpu_usage',
         name='CPU usage',
-        measured_unit='CPU/h'
+        measured_unit='core-h'
     )
 
     plan, _ = Plan.objects.get_or_create(
         name='Dellingr pilot',
         description='Default plan for all applications via Dellingr',
-        unit=UnitPriceMixin.Units.QUANTITY,
+        unit=UnitPriceMixin.Units.PER_MONTH,
         offering=offering,
     )
 
