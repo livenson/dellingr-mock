@@ -237,6 +237,7 @@ aurora, _ = Offering.objects.get_or_create(
 aurora.thumbnail.save('aurora.jpg', File(open(base + 'aurora.jpg', 'r')))
 generate_plan(aurora)
 
+
 customer, _ = Customer.objects.get_or_create(
     name='CSC',
     email='servicedesk@csc.fi',
@@ -245,42 +246,42 @@ ServiceProvider.objects.get_or_create(
     customer=customer,
     enable_notifications=False,
 )
-csc, _ = Offering.objects.get_or_create(
-    name='CSC Taito',
+taito, _ = Offering.objects.get_or_create(
+    name='Taito',
     state=Offering.States.ACTIVE,
     category=cat,
     shared=True,
-    description='The Taito supercluster (taito.csc.fi) is intended for serial (single-core) and small to medium-size parallel jobs.',
-    full_description='<h2>Overview</h2>The Taito supercluster (taito.csc.fi) is intended for serial (single-core) and '
-                     'small to medium-size parallel jobs. There are also several "fat nodes" for jobs requiring a large '
-                     'amount of memory. Taito consists of sixteen cabinets, with a total theoretical peak performance '
-                     'of 600 TFLOPS. Taito has been deployed in two phases that presently coexist.',
+    description='Computing cluster for serial and small-sized parallel jobs.',
+    full_description='<h2>Overview</h2>Taito is a computing cluster hosted by CSC - IT Center for Science, Finland. '
+                     'It is intended for serial jobs and parallel jobs using up to 672 cores. '
+                     'Finland\'s largest collection of scientific sofware and databases is available for users of Taito. '
+                     'Taito is physically located at Kajaani.',
     rating=5,
     customer=customer,
     type='Support.OfferingTemplate',
-    geolocations=[{"latitude": 55.7119513, "longitude": 13.2013043}],
+    geolocations=[{"latitude": 64.231203, "longitude": 27.704096}],
     attributes={
-        u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E7-8860v4'],
-        u'node_information_gpu': [u'node_information_gpu_NVidia_P100', u'node_information_gpu_NVidia_V100'],
-        u'node_information_interconnect': [u'node_information_interconnect_Ethernet_10G'],
-        u'node_information_local_disk': 0,
-        u'node_information_memory': 0,
-        u'node_information_node_count': 0,
-        u'performance_linpak': 0,
-        u'performance_tflops': 0,
-        u'software_applications': [u'software_applications_Matlab'],
-        u'system_information_home_space': u'/home/smth',
-        u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
+        u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E5-2690v3', u'node_information_cpu_Intel_Xeon_E5-2670'],
+        u'node_information_gpu': [u'node_information_gpu_Nvidia_P100', u'node_information_gpu_Nvidia_K80'],
+        u'node_information_interconnect': [u'node_information_interconnect_Infiniband_FDR'],
+        u'node_information_local_disk': 1900,
+        u'node_information_memory': 128,
+        u'node_information_node_count': 1000,
+        u'performance_linpack': 500,
+        u'performance_tflops': 600,
+        u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
+        u'system_information_home_space': u'/homeappl/home/username',
+        u'system_information_linux_distro': [u'system_information_linux_distro_rhel6'],
         u'system_information_queing_system': [u'system_information_queing_system_slurm'],
-        u'system_information_work_space': u'/tmp',
+        u'system_information_work_space': u'/wrk/username',
         u'support_email': u'servicedesk@csc.fi',
-        u'support_phone': u'+358 (0) 94 57 2821',
+        u'support_phone': u'+35894572821',
         u'support_portal': u'https://research.csc.fi/support',
     },
     options=hpc_configuration
 )
-csc.thumbnail.save('csc.png', File(open(base + 'csc.png', 'r')))
-generate_plan(csc)
+taito.thumbnail.save('csc.png', File(open(base + 'csc.png', 'r')))
+generate_plan(taito)
 
 
 customer, _ = Customer.objects.get_or_create(
