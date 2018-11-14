@@ -80,8 +80,8 @@ hpc_attributes = {
         ('node_count', 'Node count', integer),
     ],
     'performance': [
-        ('tflops', 'TFlops', integer),
-        ('linpak', 'Linpack TPP', integer)
+        ('tflops', 'Peak TFlop/s', integer),
+        ('linpack', 'Linpack TFlop/s', integer)
     ],
     'software': [
         ('applications', 'Applications', listattr),
@@ -99,24 +99,23 @@ hpc_attributes = {
 
 enums = {
     'linux_distro': [
-        ('centos7', 'CentOS7'),
-        ('ubuntu1604', 'Ubuntu 16.04')
+        ('centos7', 'CentOS Linux 7'),
+        ('rhel6', 'Red Hat Enterprise Linux 66')
     ],
     'queing_system': [
-        ('slurm', 'SLURM'),
+        ('slurm', 'Slurm'),
         ('torque', 'Torque'),
-        ('moab', 'MOAB'),
+        ('moab', 'Moab'),
     ],
     'cpu': [
-        ('Intel_Xeon_E5-2650v3', 'Intel Xeon E5-2650v3',),
-        ('Intel_Xeon_Gold_6132', 'Intel Xeon Gold 6132'),
+        ('Intel_Xeon_E5-2670', 'Intel_Xeon_E5-2670',),
+        ('Intel_Xeon_E5-2680v3', 'Intel_Xeon_E5-2680v3'),
+        ('Intel_Xeon_E5-2690v3', 'Intel_Xeon_E5-2690v3'),
         ('Intel_Xeon_E7-8860v4', 'Intel Xeon E7-8860v4'),
-        ('Intel_Xeon_E5-2680v3', 'Intel Xeon E5-2680v3'),
     ],
     'gpu': [
-        ('NVidia_K80', 'NVidia K80'),
-        ('NVidia_P100', 'NVidia V100'),
-        ('NVidia_V100', 'NVidia V100'),
+        ('Nvidia_K80', 'Nvidia K80'),
+        ('Nvidia_P100', 'Nvidia P100'),
     ],
     'interconnect': [
         ('Infiniband_FDR', 'Infiniband FDR'),
@@ -126,7 +125,7 @@ enums = {
     ],
     'applications': [
         ('Matlab', 'Matlab'),
-        ('Gromacs', 'GROMACS'),
+        ('Gromacs', 'Gromacs'),
     ],
     'certification': [
         ('sensitive_data', 'Able to process sensitive data'),
@@ -215,12 +214,12 @@ aurora, _ = Offering.objects.get_or_create(
     geolocations=[{"latitude": 55.7119513, "longitude": 13.2013043}],
     attributes={
         u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E5-2680v3'],
-        u'node_information_gpu': [u'node_information_gpu_NVidia_P100'],
+        u'node_information_gpu': [u'node_information_gpu_Nvidia_P100'],
         u'node_information_interconnect': [u'node_information_interconnect_Infiniband_FDR'],
         u'node_information_local_disk': 200,
         u'node_information_memory': 64,
         u'node_information_node_count': 584,
-        u'performance_linpak': 462.4,
+        u'performance_linpack': 462.4,
         u'performance_tflops': 766.6,
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/home/TBA',
@@ -310,12 +309,12 @@ computerome, _ = Offering.objects.get_or_create(
     geolocations=[{"latitude": 55.7119513, "longitude": 13.2013043}],
     attributes={
         u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E7-8860v4'],
-        u'node_information_gpu': [u'node_information_gpu_NVidia_P100'],
+        u'node_information_gpu': [u'node_information_gpu_Nvidia_P100'],
         u'node_information_interconnect': [u'node_information_interconnect_Ethernet_10G'],
         u'node_information_local_disk': 0,
         u'node_information_memory': 0,
         u'node_information_node_count': 0,
-        u'performance_linpak': 0,
+        u'performance_linpack': 0,
         u'performance_tflops': 0,
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/home/smth',
@@ -346,12 +345,12 @@ abacus, _ = Offering.objects.get_or_create(
     geolocations=[{"latitude": 55.3686303, "longitude": 10.4266494}],
     attributes={
         u'node_information_cpu': [u'node_information_cpu_Intel_Xeon_E5-2680v3'],
-        u'node_information_gpu': [u'node_information_gpu_NVidia_P100'],
+        u'node_information_gpu': [u'node_information_gpu_Nvidia_P100'],
         u'node_information_interconnect': [u'node_information_interconnect_Infiniband_FDR'],
         u'node_information_local_disk': 200,
         u'node_information_memory': 64,
         u'node_information_node_count': 584,
-        u'performance_linpak': 462.4,
+        u'performance_linpack': 462.4,
         u'performance_tflops': 766.6,
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/home/smth',
@@ -397,7 +396,7 @@ tartu, _ = Offering.objects.get_or_create(
         u'node_information_local_disk': 0,
         u'node_information_memory': 0,
         u'node_information_node_count': 0,
-        u'performance_linpak': 0,
+        u'performance_linpack': 0,
         u'performance_tflops': 0,
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/home/smth',
@@ -440,7 +439,7 @@ iceland, _ = Offering.objects.get_or_create(
         u'node_information_local_disk': 900,
         u'node_information_memory': 128,
         u'node_information_node_count': 36,
-        u'performance_linpak': 0,
+        u'performance_linpack': 0,
         u'performance_tflops': 175,
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/users/home/TBA',
