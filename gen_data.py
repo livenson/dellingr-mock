@@ -132,20 +132,19 @@ enums = {
     ]
 }
 
-hpc_configuration = {
-        'prefill_name': True,  # If True, name would be pre-filled with label in request creation form
-        'order': ['core_hours'],
-        'options': {
-            'core_hours': {
-                'type': 'integer',
-                'label': 'Expected core/hours',
-                'help_text': 'In thousands',
-                'default': 50,
-                'min': 1,
-                'required': True,  # if field must be provided by a user.
-            }
-        }
-    }
+hpc_configuration = {}
+    # 'prefill_name': True,  # If True, name would be pre-filled with label in request creation form
+    # 'order': ['core_hours'],
+    # 'options': {
+    #     'core_hours': {
+    #         'type': 'integer',
+    #         'label': 'Expected core/hours',
+    #         'help_text': 'In thousands',
+    #         'default': 50,
+    #         'min': 1,
+    #         'required': True,  # if field must be provided by a user.
+    #     }
+    # }
 
 
 # default plan for all
@@ -155,22 +154,34 @@ def generate_plan(offering):
         billing_type=OfferingComponent.BillingTypes.USAGE,
         type='cpu_usage',
         name='CPU usage',
-        measured_unit='CPU/h'
+        measured_unit='core-h'
+    )
+    gpu_usage, _ = OfferingComponent.objects.get_or_create(
+        offering=offering,
+        billing_type=OfferingComponent.BillingTypes.USAGE,
+        type='gpu_usage',
+        name='GPU usage',
+        measured_unit='core-h'
     )
 
     plan, _ = Plan.objects.get_or_create(
         name='Dellingr pilot',
-        description='Default plan for all applications via Dellingr',
-        unit=UnitPriceMixin.Units.QUANTITY,
+        description='Default plan for all resources provided via Dellingr',
+        unit=UnitPriceMixin.Units.PER_MONTH,
         offering=offering,
     )
 
     cpu_usage_plan_component, _ = PlanComponent.objects.get_or_create(
         plan=plan,
         component=cpu_usage,
-        price=1
+        price=0.01,
     )
 
+    gpu_usage_plan_component, _ = PlanComponent.objects.get_or_create(
+        plan=plan,
+        component=gpu_usage,
+        price=0.1,
+    )
 
 cat, _ = Category.objects.get_or_create(title='HPC', description='High Performance Computing systems')
 cat.icon.save('data-center.svg', File(open(base + 'data-center.svg', 'r')))
