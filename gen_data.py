@@ -66,7 +66,7 @@ hpc_sections = {
 
 hpc_attributes = {
     'system_information': [
-        ('queing_system', 'Queueing system', listattr),
+        ('queuing_system', 'Queueing system', listattr),
         ('home_space', 'Home space', string),
         ('work_space', 'Work space', string),
         ('linux_distro', 'Linux distribution', listattr),
@@ -100,9 +100,9 @@ hpc_attributes = {
 enums = {
     'linux_distro': [
         ('centos7', 'CentOS Linux 7'),
-        ('rhel6', 'Red Hat Enterprise Linux 66')
+        ('rhel6', 'Red Hat Enterprise Linux 6')
     ],
-    'queing_system': [
+    'queuing_system': [
         ('slurm', 'Slurm'),
         ('torque', 'Torque'),
         ('moab', 'Moab'),
@@ -235,7 +235,7 @@ aurora, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/home/TBA',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
-        u'system_information_queing_system': [u'system_information_queing_system_slurm'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_slurm'],
         u'system_information_work_space': u'/tmp',
         u'support_email': u'support@lunarc.lu.se',
         u'support_phone': u'+46 2224454',
@@ -264,7 +264,7 @@ taito, _ = Offering.objects.get_or_create(
     description='Computing cluster for serial and small-sized parallel jobs.',
     full_description='<h2>Overview</h2>Taito is a computing cluster hosted by CSC - IT Center for Science, Finland. '
                      'It is intended for serial jobs and parallel jobs using up to 672 cores. '
-                     'Finland\'s largest collection of scientific sofware and databases is available for users of Taito. '
+                     'Finland\'s largest collection of scientific software and databases is available for users of Taito. '
                      'Taito is physically located at Kajaani.',
     rating=5,
     customer=customer,
@@ -282,7 +282,7 @@ taito, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/homeappl/home/username',
         u'system_information_linux_distro': [u'system_information_linux_distro_rhel6'],
-        u'system_information_queing_system': [u'system_information_queing_system_slurm'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_slurm'],
         u'system_information_work_space': u'/wrk/username',
         u'support_email': u'servicedesk@csc.fi',
         u'support_phone': u'+35894572821',
@@ -330,7 +330,7 @@ computerome, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/home/smth',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
-        u'system_information_queing_system': [u'system_information_queing_system_moab'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_moab'],
         u'system_information_work_space': u'/tmp',
         u'support_email': u'hpc@bio.dtu.dk',
         u'support_phone': u'+45 60 90 46 46',
@@ -366,7 +366,7 @@ abacus, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab', u'software_applications_Gromacs'],
         u'system_information_home_space': u'/home/smth',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
-        u'system_information_queing_system': [u'system_information_queing_system_slurm'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_slurm'],
         u'system_information_work_space': u'/tmp',
         u'support_email': u'support@escience.sdu.dk',
         u'support_phone': u'(+45) 6550 2678',
@@ -412,7 +412,7 @@ tartu, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/home/smth',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
-        u'system_information_queing_system': [u'system_information_queing_system_slurm'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_slurm'],
         u'system_information_work_space': u'/tmp',
         u'support_email': u'support@hpc.ut.ee',
         u'support_phone': u'(+372) 566 292 82',
@@ -455,7 +455,7 @@ iceland, _ = Offering.objects.get_or_create(
         u'software_applications': [u'software_applications_Matlab'],
         u'system_information_home_space': u'/users/home/TBA',
         u'system_information_linux_distro': [u'system_information_linux_distro_centos7'],
-        u'system_information_queing_system': [u'system_information_queing_system_slurm'],
+        u'system_information_queuing_system': [u'system_information_queuing_system_slurm'],
         u'system_information_work_space': u'/users/work/TBA',
         u'support_email': u'support-hpc@hi.is',
         u'support_phone': u'525-4745',
