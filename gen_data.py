@@ -132,7 +132,7 @@ enums = {
     ]
 }
 
-hpc_configuration = {}
+hpc_configuration = {'order': [], 'options': {}}
     # 'prefill_name': True,  # If True, name would be pre-filled with label in request creation form
     # 'order': ['core_hours'],
     # 'options': {
