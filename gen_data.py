@@ -49,12 +49,6 @@ base = ''  # path relative to the cwd or absolute
 
 #### Structure ####
 
-sections = {
-    'security': 'Security',
-    'performance': 'Performance',
-    'support': 'Support',
-}
-
 hpc_sections = {
     'system_information': 'System information',
     'node_information': 'Node information',
@@ -145,6 +139,79 @@ hpc_configuration = {'order': [], 'options': {}}
     #         'required': True,  # if field must be provided by a user.
     #     }
     # }
+
+
+oecd_science_domain_configuration = {
+    'type': 'select_string',
+    'label': 'Science Domain',
+    'help_text': 'Please select your intended science domain in (OECD 2007 classification)',
+    'required': True,
+    'choices': [
+        '1.1 Mathematics',
+        '1.2 Computer and information sciences',
+        '1.3 Physical sciences',
+        '1.4 Chemical sciences',
+        '1.5 Earth and related environmental sciences',
+        '1.6 Biological sciences',
+        '1.7 Other natural sciences',
+
+        '2.1 Civil engineering',
+        '2.2 Electrical engineering, electronic engineering, information engineering',
+        '2.3 Mechanical engineering',
+        '2.4 Chemical engineering',
+        '2.5 Materials engineering',
+        '2.6 Medical engineering',
+        '2.7 Environmental engineering',
+        '2.8 Environmental biotechnology',
+        '2.9 Industrial Biotechnology',
+        '2.10 Nano-technology',
+        '2.11 Other engineering and technologies',
+
+        '3.1 Basic medicine',
+        '3.2 Clinical medicine',
+        '3.3 Health sciences',
+        '3.4 Health biotechnology',
+        '3.5 Other medical sciences',
+
+        '4.1 Agriculture, forestry, and fisheries',
+        '4.2 Animal and dairy science',
+        '4.3 Veterinary science',
+        '4.4 Agricultural biotechnology',
+        '4.5 Other agricultural sciences',
+
+        '5.1 Psychology',
+        '5.2 Economics and business',
+        '5.3 Educational sciences',
+        '5.3 Sociology',
+        '5.5 Law',
+        '5.6 Political Science',
+        '5.7 Social and economic geography',
+        '5.8 Media and communications',
+        '5.7 Other social sciences',
+
+        '6.1 History and archaeology',
+        '6.2 Languages and literature',
+        '6.3 Philosophy, ethics and religion',
+        '6.4 Art (arts, history of arts, performing arts, music)',
+        '6.5 Other humanities',
+    ],
+}
+
+nationality_configuraiton = {
+    'type': 'string',
+    'label': 'Nationalities of users',
+    'help_text': 'Due to potential limitations of access to HPC systems and software, '
+                 'please provide nationalities of expected users',
+    'required': True,
+}
+
+extended_configuration = {
+    'order': ['oecd_science_domain_configuration', 'nationality'],
+    'options': {
+        'oecd_science_domain_configuration': oecd_science_domain_configuration,
+        'nationality': nationality_configuraiton,
+    },
+}
 
 
 # default plan for all
